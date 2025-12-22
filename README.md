@@ -1,13 +1,3 @@
----
-license: apache-2.0
-title: Modelscope Migration
-sdk: gradio
-emoji: 🚀
-colorFrom: red
-colorTo: blue
-short_description: Migrate your models to modelscope
-sdk_version: 6.2.0
----
 
 # 🚀 HuggingFace to ModelScope Migration Tool
 
@@ -33,7 +23,7 @@ A user-friendly Gradio application for migrating models and datasets from [Huggi
 
 1. Clone this repository:
 ```bash
-git clone <repository-url>
+git clone [Linaqruf/modelscope-migration](https://github.com/Linaqruf/modelscope-migration)
 cd modelscope-migration
 ```
 
