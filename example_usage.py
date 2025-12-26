@@ -5,6 +5,9 @@ This example shows how to use the MigrationTool class directly without the Gradi
 """
 
 import os
+
+from huggingface_hub import HfApi
+
 from app import MigrationTool
 
 
@@ -20,6 +23,8 @@ def main():
     HF_TOKEN = os.getenv("HUGGINGFACE_TOKEN", "")
     MS_TOKEN = os.getenv("MODELSCOPE_TOKEN", "")
 
+    hf_client = HfApi(token=HF_TOKEN)
+
     # Source repository on HuggingFace
     HF_REPO_ID = "sentence-transformers/all-MiniLM-L6-v2"  # Example small model
 
@@ -29,7 +34,10 @@ def main():
     # Repository configuration
     REPO_TYPE = "model"  # or "dataset"
     VISIBILITY = "public"  # or "private"
-    LICENSE = "apache-2.0"  # apache-2.0, mit, gpl-3.0, other
+    LICENSE = 'other'
+    for tag in hf_client.repo_info(repo_id=HF_REPO_ID, repo_type=REPO_TYPE).tags:
+        if tag.startswith('license:'):  # auto find license from original huggingface repository
+            LICENSE = tag[len('license:'):]
     CHINESE_NAME = "小型句子转换模型"  # Optional
 
     # Validate tokens
